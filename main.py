@@ -1,20 +1,11 @@
-import asyncio
-import os
-import time
-from tkinter import Tk, messagebox, ttk
+
 from tkinter import *
-from tkinter.ttk import Treeview
 from PIL import Image, ImageTk
-import ar_master
-import csv
-import numpy as np
-import cv2
+from csv_data_classification import csv_data_classification
+from ecg_image_select_option import ecg_image_select_option
+from echo_image_classify_select import echo_image_select_option
 
-from echo_image_classification import echo_image_classify
-from echo_image_classification1 import echo_image_classify1
-
-
-class echo_image_select_option():
+class cardiovascular_disease():
     path = ""
     feature = 0
     soil = ""
@@ -65,34 +56,43 @@ class echo_image_select_option():
         canvas.create_text(400, 40, text=self.titlec, font=("Times New Roman", 24), fill=self.text_color)
         def clickHandler(event):
             root.destroy()
-            ar = echo_image_classify()
-            ar.home_window()
-        image = Image.open('images/test.png')
+            tt = csv_data_classification()
+            tt.home_window()
+        image = Image.open('images/csv.png')
         img = image.resize((125, 125))
         my_img = ImageTk.PhotoImage(img)
-        image_id = canvas.create_image(250, 200, image=my_img)
+        image_id = canvas.create_image(200, 200, image=my_img)
         canvas.tag_bind(image_id, "<1>", clickHandler)
-        admin_id = canvas.create_text(250, 300, text="TRAINING", font=("Times New Roman", 24), fill=self.text_color)
+        admin_id = canvas.create_text(200, 300, text="CSV", font=("Times New Roman", 24), fill=self.text_color)
         canvas.tag_bind(admin_id, "<1>", clickHandler)
 
         def clickHandler1(event):
             root.destroy()
-            ar = echo_image_classify1()
-            ar.home_window()
-        image1 = Image.open('images/train.png')
+            ar1 = echo_image_select_option()
+            ar1.set_window_design()
+        image1 = Image.open('images/echo.png')
         img1 = image1.resize((125, 125))
         my_img1 = ImageTk.PhotoImage(img1)
-        image_id1 = canvas.create_image(500, 200, image=my_img1)
+        image_id1 = canvas.create_image(400, 200, image=my_img1)
         canvas.tag_bind(image_id1, "<1>", clickHandler1)
 
-        admin_id1 = canvas.create_text(500, 300, text="TESTING", font=("Times New Roman", 24), fill=self.text_color)
+        admin_id1 = canvas.create_text(400, 300, text="ECHO", font=("Times New Roman", 24), fill=self.text_color)
         canvas.tag_bind(admin_id1, "<1>", clickHandler1)
 
         def clickHandler2(event):
             root.destroy()
+            sh1 = ecg_image_select_option()
+            sh1.set_window_design()
 
 
+        image2 = Image.open('images/ecc.png')
+        img2 = image2.resize((125, 125))
+        my_img2 = ImageTk.PhotoImage(img2)
+        image_id2 = canvas.create_image(600, 200, image=my_img2)
+        canvas.tag_bind(image_id2, "<1>", clickHandler2)
 
+        admin_id1 = canvas.create_text(600, 300, text="ECG", font=("Times New Roman", 24), fill=self.text_color)
+        canvas.tag_bind(admin_id1, "<1>", clickHandler2)
 
 
 
@@ -100,3 +100,5 @@ class echo_image_select_option():
 
 
 
+ar = cardiovascular_disease()
+ar.set_window_design()
